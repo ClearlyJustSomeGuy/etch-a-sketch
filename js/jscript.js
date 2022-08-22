@@ -1,16 +1,5 @@
 let columns = 15;
 
-// //Check for change in colors checkbox
-// let colorCheckbox = document.querySelector('#colors');
-// colorCheckbox.addEventListener('change', () => {
-//     if (colorCheckbox.checked) {
-//         drawColor();
-//     }
-//     drawGray();
-// })
-
-
-
 // Draw the grid layout
 function drawGrid(columns) {
     //Remove existing grid-item divs
@@ -31,39 +20,35 @@ function drawGrid(columns) {
     }
 }
 
-drawGrid(columns);
-
-
-
 function drawGray() {
     // Set grid items to black when mouseover   
     const grids = document.querySelectorAll(".grid-item");
     grids.forEach((box) => {
         box.addEventListener('mouseover', () => {
-            box.style.background = 'black';
-            let itemOpacity = box.style.opacity;
-            if (itemOpacity) {
+            if (box.style.background != 'black') {
+                box.style.background = 'black';
+                box.style.opacity = 0.2;
+            }
+            else {
+                let itemOpacity = box.style.opacity;
                 itemOpacity = parseFloat(itemOpacity);
                 itemOpacity += 0.2;
                 box.style.opacity = itemOpacity;
-            } else {
-                box.style.opacity = 0.2;
             }
-            
         })
     })
 }
 
-
-// function drawColor() {
-//     // Set grid items to black when mouseover   
-//     grids.forEach((box) => {
-//         box.addEventListener('mouseover', () => {
-//             // let color = getRandomColor();
-//             box.style.background = getRandomColor();           
-//         })
-//     })
-// }
+function drawColor() {
+    // Set grid items to random color when mouseover
+    const grids = document.querySelectorAll(".grid-item");
+    grids.forEach((box) => {
+        box.addEventListener('mouseover', () => {
+            box.removeAttribute('style');
+            box.style.background = getRandomColor();
+        })
+    })
+}
 
 
 function resetGrid() {
@@ -81,7 +66,15 @@ function getRandomColor() {
     return `rgb(${r}, ${g}, ${b})`
 }
 
-drawGray();
+//Check for change in colors checkbox
+let colorCheckbox = document.querySelector('#colors');
+colorCheckbox.addEventListener('change', () => {
+    if (colorCheckbox.checked) {
+        drawColor();
+    } else {
+        drawGray();
+    }
+})
 
 // Reset grid items color when reset clicked
 const reset = document.querySelector("#reset");
@@ -98,5 +91,12 @@ ucolumns.addEventListener('click', () => {
 
     columns = Math.floor(columns);
     drawGrid(columns);
-    drawGray();
+    if (colorCheckbox.checked) {
+        drawColor();
+    } else {
+        drawGray();
+    }
 })
+
+drawGrid(columns);
+drawGray();
