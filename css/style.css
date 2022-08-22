@@ -13,8 +13,8 @@ body {
 }
 
 .grid-container {
-    width: 1000px;
-    height: 1000px;
+    width: 960px;
+    height: 960px;
     background-color:beige;
     margin-left:auto;
     margin-right: auto;
