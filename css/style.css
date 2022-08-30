@@ -3,16 +3,21 @@ body {
     font-family:'Times New Roman', Times, serif;
 }
 
+h1 {
+    margin-bottom: 10px;
+}
+
 #title {
     text-align: center;
     background-color: darkblue;
     color: salmon;
     height: 100px;
     width: auto;
-    padding-top: 30px;
+    padding-top: 5px;
 }
 
 .grid-container {
+    margin-top: 10px;
     width: 960px;
     height: 960px;
     background-color:beige;
