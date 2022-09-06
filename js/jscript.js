@@ -27,6 +27,7 @@ function drawGray() {
         box.addEventListener('mouseover', (e) => {
             if (e.buttons === 1) {
                 if (box.style.background != 'black') {
+                    console.log(box.style.background);
                     box.style.background = 'black';
                     box.style.opacity = 0.2;
                 }
@@ -46,7 +47,7 @@ function drawColor() {
     const grids = document.querySelectorAll(".grid-item");
     grids.forEach((box) => {
         box.addEventListener('mouseover', (e) => {
-            if (e.buttons === 1) {
+            if (e.buttons === 1 && colorCheckbox.checked) {
                 box.removeAttribute('style');
                 box.style.background = getRandomColor();
             }
@@ -59,6 +60,8 @@ function resetGrid() {
     const grids = document.querySelectorAll(".grid-item");
     grids.forEach((box) => {
         // box.classList.remove('dark');
+        box.style.background = '';
+        box.style.opacity = 0;
         box.removeAttribute('style');
     })
 }

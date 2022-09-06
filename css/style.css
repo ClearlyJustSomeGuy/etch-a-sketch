@@ -9,7 +9,7 @@ h1 {
 
 #title {
     text-align: center;
-    background-color: darkblue;
+    /* background-color: darkblue; */
     color: salmon;
     height: 100px;
     width: 960px;
