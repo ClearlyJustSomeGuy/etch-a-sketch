@@ -20,42 +20,6 @@ function drawGrid(columns) {
     }
 }
 
-function drawGray() {
-    // Set grid items to black when mouseover   
-    const grids = document.querySelectorAll(".grid-item");
-    grids.forEach((box) => {
-        box.addEventListener('mouseover', (e) => {
-            if (e.buttons === 1) {
-                if (box.style.background != 'black') {
-                    console.log(box.style.background);
-                    box.style.background = 'black';
-                    box.style.opacity = 0.2;
-                }
-                else {
-                    let itemOpacity = box.style.opacity;
-                    itemOpacity = parseFloat(itemOpacity);
-                    itemOpacity += 0.2;
-                    box.style.opacity = itemOpacity;
-                }
-            }
-        })
-    })
-}
-
-function drawColor() {
-    // Set grid items to random color when mouseover
-    const grids = document.querySelectorAll(".grid-item");
-    grids.forEach((box) => {
-        box.addEventListener('mouseover', (e) => {
-            if (e.buttons === 1 && colorCheckbox.checked) {
-                box.removeAttribute('style');
-                box.style.background = getRandomColor();
-            }
-        })
-    })
-}
-
-
 function resetGrid() {
     const grids = document.querySelectorAll(".grid-item");
     grids.forEach((box) => {
@@ -73,15 +37,32 @@ function getRandomColor() {
     return `rgb(${r}, ${g}, ${b})`
 }
 
-//Check for change in colors checkbox
+// Set grid items to black or color when mouseover
+function draw(){
+    const grids = document.querySelectorAll(".grid-item");
+    grids.forEach((box) => {
+        box.addEventListener('mouseover', (e) => {
+            if (e.buttons === 1 && !colorCheckbox.checked) {
+                if (box.style.background != 'black') {
+                    box.style.background = 'black';
+                    box.style.opacity = 0.2;
+                }
+                else {
+                    let itemOpacity = box.style.opacity;
+                    itemOpacity = parseFloat(itemOpacity);
+                    itemOpacity += 0.2;
+                    box.style.opacity = itemOpacity;
+                }
+            } else if (e.buttons === 1 && colorCheckbox.checked) {
+                box.removeAttribute('style');
+                box.style.background = getRandomColor();
+            }
+        })
+    })
+}
+
+// Var definition for colors checkbox
 let colorCheckbox = document.querySelector('#colors');
-colorCheckbox.addEventListener('change', () => {
-    if (colorCheckbox.checked) {
-        drawColor();
-    } else {
-        drawGray();
-    }
-})
 
 // Reset grid items color when reset clicked
 const reset = document.querySelector("#reset");
@@ -98,12 +79,9 @@ ucolumns.addEventListener('click', () => {
 
     columns = Math.floor(columns);
     drawGrid(columns);
-    if (colorCheckbox.checked) {
-        drawColor();
-    } else {
-        drawGray();
-    }
+    draw();
 })
 
+
 drawGrid(columns);
-drawGray();
+draw();
