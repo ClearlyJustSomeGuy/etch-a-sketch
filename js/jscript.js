@@ -45,12 +45,12 @@ function draw(){
             if (e.buttons === 1 && !colorCheckbox.checked) {
                 if (box.style.background != 'black') {
                     box.style.background = 'black';
-                    box.style.opacity = 0.2;
+                    box.style.opacity = 0.33;
                 }
                 else {
                     let itemOpacity = box.style.opacity;
                     itemOpacity = parseFloat(itemOpacity);
-                    itemOpacity += 0.2;
+                    itemOpacity += 0.33;
                     box.style.opacity = itemOpacity;
                 }
             } else if (e.buttons === 1 && colorCheckbox.checked) {
