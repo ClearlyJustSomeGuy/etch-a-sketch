@@ -12,8 +12,9 @@ h1 {
     background-color: darkblue;
     color: salmon;
     height: 100px;
-    width: auto;
+    width: 960px;
     padding-top: 5px;
+    margin: 0px auto;
 }
 
 .grid-container {

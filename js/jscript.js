@@ -1,4 +1,4 @@
-let columns = 15;
+let columns = 25;
 
 // Draw the grid layout
 function drawGrid(columns) {
@@ -24,16 +24,18 @@ function drawGray() {
     // Set grid items to black when mouseover   
     const grids = document.querySelectorAll(".grid-item");
     grids.forEach((box) => {
-        box.addEventListener('mouseover', () => {
-            if (box.style.background != 'black') {
-                box.style.background = 'black';
-                box.style.opacity = 0.2;
-            }
-            else {
-                let itemOpacity = box.style.opacity;
-                itemOpacity = parseFloat(itemOpacity);
-                itemOpacity += 0.2;
-                box.style.opacity = itemOpacity;
+        box.addEventListener('mouseover', (e) => {
+            if (e.buttons === 1) {
+                if (box.style.background != 'black') {
+                    box.style.background = 'black';
+                    box.style.opacity = 0.2;
+                }
+                else {
+                    let itemOpacity = box.style.opacity;
+                    itemOpacity = parseFloat(itemOpacity);
+                    itemOpacity += 0.2;
+                    box.style.opacity = itemOpacity;
+                }
             }
         })
     })
@@ -43,9 +45,11 @@ function drawColor() {
     // Set grid items to random color when mouseover
     const grids = document.querySelectorAll(".grid-item");
     grids.forEach((box) => {
-        box.addEventListener('mouseover', () => {
-            box.removeAttribute('style');
-            box.style.background = getRandomColor();
+        box.addEventListener('mouseover', (e) => {
+            if (e.buttons === 1) {
+                box.removeAttribute('style');
+                box.style.background = getRandomColor();
+            }
         })
     })
 }
